@@ -24,6 +24,7 @@ const onSubmitAction = event => {
 
 function fillInputs() {
   const userSaveData = localStorage.getItem('feedback-form-state');
+
   if (userSaveData) {
     const userParceData = JSON.parse(userSaveData);
     refs.input.value = userParceData.email;
