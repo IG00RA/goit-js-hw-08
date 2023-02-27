@@ -7,33 +7,36 @@ const refs = {
   button: document.querySelector('button[type=submit]'),
 };
 
-const userParceData = JSON.parse(localStorage.getItem('feedback-form-state'));
-
-fillInputs();
+const onSubmitAction = event => {
+  event.preventDefault();
+  event.currentTarget.reset();
+  localStorage.removeItem('feedback-form-state');
+  userData = {};
+};
 
 let userData;
 
 if (localStorage.getItem('feedback-form-state')) {
+  const userParceData = JSON.parse(localStorage.getItem('feedback-form-state'));
   userData = { ...userParceData };
 } else {
   userData = {};
 }
+
+fillInputs();
+
 const onInputText = event => {
   userData[event.target.name] = event.target.value;
   localStorage.setItem('feedback-form-state', JSON.stringify(userData));
   console.log(userData);
 };
 
-const onSubmitAction = event => {
-  event.preventDefault();
-  event.currentTarget.reset();
-  localStorage.removeItem('feedback-form-state');
-};
-
 function fillInputs() {
-  if (userParceData) {
-    refs.input.value = userParceData.email;
-    refs.textarea.value = userParceData.message;
+  if (userData.email) {
+    refs.input.value = userData.email;
+  }
+  if (userData.message) {
+    refs.textarea.value = userData.message;
   }
 }
 
