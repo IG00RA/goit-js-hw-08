@@ -1,4 +1,10 @@
-export const galleryItems = [
+export interface GallItems {
+  preview: string;
+  original: string;
+  description: string;
+}
+
+export const galleryItems: GallItems[] = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',

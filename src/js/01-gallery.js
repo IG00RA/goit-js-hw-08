@@ -1,6 +1,4 @@
-// Add imports above this line
 import { galleryItems } from './gallery-items';
-// Change code below this line
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 const galleryElem = document.querySelector('.gallery');
@@ -9,5 +7,5 @@ const previewImg = galleryItems.reduce((acc, item) => {
   <img class="gallery__image" src="${item.preview}" alt="${item.description}" title="${item.description}" />
 </a>`);
 }, '');
-galleryElem.insertAdjacentHTML('beforeend', previewImg);
-const lightbox = new SimpleLightbox('.gallery a', { captionDelay: 250 });
+galleryElem === null || galleryElem === void 0 ? void 0 : galleryElem.insertAdjacentHTML('beforeend', previewImg);
+new SimpleLightbox('.gallery a', { captionDelay: 250 });
