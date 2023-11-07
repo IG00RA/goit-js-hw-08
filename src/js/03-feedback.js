@@ -5,33 +5,43 @@ const refs = {
     form: document.querySelector('.feedback-form'),
     button: document.querySelector('button[type=submit]'),
 };
-const onSubmitAction = event => {
-    event.preventDefault();
-    event.currentTarget.reset();
-    localStorage.removeItem('feedback-form-state');
-    userData = {};
+let userData = {};
+const onSubmitAction = (event) => {
+    const form = event.currentTarget;
+    if (form instanceof HTMLFormElement) {
+        event.preventDefault();
+        form.reset();
+        localStorage.removeItem('feedback-form-state');
+        userData = {};
+    }
 };
-let userData;
-if (localStorage.getItem('feedback-form-state')) {
-    const userParceData = JSON.parse(localStorage.getItem('feedback-form-state'));
+const userStorageData = localStorage.getItem('feedback-form-state');
+if (userStorageData) {
+    const userParceData = JSON.parse(userStorageData);
     userData = { ...userParceData };
 }
 else {
     userData = {};
 }
-fillInputs();
-const onInputText = event => {
-    userData[event.target.name] = event.target.value;
+const onInputText = (event) => {
+    const input = event.target;
+    if (input instanceof HTMLInputElement ||
+        input instanceof HTMLTextAreaElement) {
+        userData[input.name] = input.value;
+    }
     localStorage.setItem('feedback-form-state', JSON.stringify(userData));
     console.log(userData);
 };
 function fillInputs() {
-    if (userData.email) {
+    if (userData.email && refs.input) {
         refs.input.value = userData.email;
     }
-    if (userData.message) {
+    if (userData.message && refs.textarea) {
         refs.textarea.value = userData.message;
     }
 }
-refs.form.addEventListener('input', throttle(onInputText, 500));
-refs.form.addEventListener('submit', onSubmitAction);
+if (refs.form) {
+    refs.form.addEventListener('input', throttle(onInputText, 500));
+    refs.form.addEventListener('submit', onSubmitAction);
+}
+fillInputs();
