@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@parcel/transformer-typescript-tsc": "^2.10.2",
+    "@types/lodash.throttle": "^4.1.9",
+    "@types/vimeo__player": "^2.18.2",
     "@vimeo/player": "^2.18.0",
     "lodash.throttle": "^4.1.1",
     "modern-normalize": "^1.1.0",
